@@ -1,46 +1,36 @@
-let firstNum;
-let operator;
-let nextNum;
-let numString;
+// SOMETHING IS WRONG WITH THE 4 OPERATOR FUNCTIONS AND operate() FUNCTION!
 
-const add = function(...args) {
-    return args.reduce((total,current) => total + current, 0)
-}
-//console.log(add(3,4,5))
+const add = (a) => a.reduce((total,current) => total + current, 0)
+const subtract = (a) => a.reduce((total,current) => total - current, a[0]*2)
+const multiply = (a) => a.reduce((total,current) => total*current, 1)
+const divide = (a) => a.reduce((total,current) => total/current, a[0]*a[0])
 
-const subtract = function (...args) {
-    return args.reduce((total,current) => total - current, args[0]*2)
-}
-//console.log(subtract(60,30,10))
-
-const multiply = function(...args) {
-    return args.reduce((total,current) => total*current, 1)
-}
-//console.log(multiply(3,4,5))
-
-const divide = function(...args) {
-    return args.reduce((total,current) => total/current, args[0]*args[0])
-}
-//console.log(divide(60,30))
+//console.log(divide([10,4]))
 
 const buttons = document.querySelector('#buttons')
 const display = document.querySelector('#display')
+const equation = document.querySelector('#equation')
 const para = document.createElement('para')
 
+//let firstNum;
+let currentOperator;
+//let nextNum;
+let numString;
 
-
-const operate = function(operator,...args) {
-    if (operator = '+') {
-        return add(...args)
-    } else if (operator = '-') {
-        return subtract(...args)
-    } else if (operator = '*') {
-        return multiply(...args)
-    } else if (operator = '/') {
-        return divide(...args)
-    }
+//operate() returns one of the 4 operation functions (+-x/) depending on the chosen operator.
+function operate(operator,array) {
+    let answer;
+    if (operator == '+') {
+        answer =  add(array);
+    } else if (operator == '-') {
+        answer =  subtract(array);
+    } else if (operator == '*') {
+        answer =  multiply(array);
+    } else if (operator == '/') {
+        answer =  divide(array);
+    } para.textContent += answer;
+    display.appendChild(para);
 }
-//console.log(operate(3,4,add))
 
 /*
 const one = document.querySelector('#one')
@@ -63,7 +53,9 @@ const multiplication = document.querySelector('#multiplication')
 const division = document.querySelector('#division')
 */
 
+//printBtns(e) prints the pressed buttons on screen and also save them in the variable numString.
 function printBtns(e) {
+    
     switch (e.target.id) {
     case 'one':
         para.textContent += 1;
@@ -107,16 +99,19 @@ function printBtns(e) {
         break;
     case 'addition':
         para.textContent += '+';
-        numString += '+';
+        numString += ' + ';
         break;
     case 'subtraction':
         para.textContent += '-';
+        numString += ' - ';
         break;
     case 'multiplication':
         para.textContent += 'x';
+        numString += ' x ';
         break;
     case 'division':
         para.textContent += '/';
+        numString += ' / '
         break;
     case 'clear':
         para.textContent = '';
@@ -124,16 +119,38 @@ function printBtns(e) {
         break;
     case 'equation':
         para.textContent += '=';
+        numString += '=';
         break;
-    } display.appendChild(para)
-    console.log(numString)
+    default:
+        numString += '';
+    } display.appendChild(para);
+    return numString;
     
 }
 
-
+//When any of the buttons is pressed, printBtns function is called.
 buttons.addEventListener("click", (printBtns))
 
+//When the '=' button is pressed, calculation begins.
+equation.addEventListener("click",() => {
+    let newStr;
+    if (numString.includes('undefined')) {
+        newStr = numString.replace('undefined','')
+    }
 
+    let numArray = newStr.split(' ')
+    let allOperators = ['+','-','x','/']
+
+    numArray.forEach((element) => {
+
+        if (allOperators.includes(element)) {
+            currentOperator = element;
+            numArray.splice((numArray.indexOf(element)),1)
+        }
+        return Number(element)
+    }) 
+    operate(currentOperator, numArray)
+})
 
 
 /*
@@ -143,4 +160,17 @@ in the next step.
 
 There needs to be an array of numbers and operator.
 When an operator button is clicked, 
+
+//Calculation for 2 numbers only
+equation.addEventListener("click",() => {
+
+    let numArray = numString.split(' ')
+    console.log(numArray);
+    firstNum = numArray[0];
+    currentOperator = numArray[1];
+    nextNum = numArray[2];
+
+})
+
 */
+
