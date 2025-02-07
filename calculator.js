@@ -7,6 +7,7 @@ const buttons = document.querySelector('#buttons')
 const display = document.querySelector('#display')
 const equation = document.querySelector('#equal')
 const para = document.createElement('para')
+const ops = document.querySelector('.ops')
 
 let firstNum;
 let currentOperator;
@@ -28,6 +29,9 @@ function operate(operator,numOne,numTwo) {
 
 
 function printBtns(e) {
+    if (firstNum !== undefined) {
+        numString = '';
+    }
     switch (e.target.id) {
         case 'one':
             numString += '1';
@@ -64,10 +68,17 @@ function printBtns(e) {
         }
         para.textContent = numString; 
         display.appendChild(para);
-        console.log(numString);
+        //console.log(numString);
 }
 
 function getOperations(e) {
+
+    if (firstNum == undefined) {
+        firstNum = numString;
+        console.log(`firstNum is ${firstNum}`)
+    } else {
+        nextNum = numString;
+    }
 
     switch (e.target.id) {
         case 'addition':
@@ -83,15 +94,16 @@ function getOperations(e) {
             currentOperator = '/'
             break;
         case 'clear':
-            currentOperator = '';
+            numString = '';
             break;
-        case 'equation':
-            break;
-    } firstNum = undefined ?? numString;
-    //console.log(firstNum)
+    } 
     
 }
 
 
 buttons.addEventListener("click", (printBtns))
-buttons.addEventListener("click", (getOperations))
+ops.addEventListener("click", (getOperations))
+/*equation.addEventListener("click", () => {
+    console.log( operate(currentOperator,firstNum,nextNum))
+})
+    */
