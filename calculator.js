@@ -1,6 +1,6 @@
 // SOMETHING IS WRONG WITH THE 4 OPERATOR FUNCTIONS AND operate() FUNCTION!
 
-const add = (a) => a.reduce((total,current) => total + current, 0)
+const add = (a,b) => a - b;
 const subtract = (a) => a.reduce((total,current) => total - current, a[0]*2)
 const multiply = (a) => a.reduce((total,current) => total*current, 1)
 const divide = (a) => a.reduce((total,current) => total/current, a[0]*a[0])
@@ -12,9 +12,9 @@ const display = document.querySelector('#display')
 const equation = document.querySelector('#equation')
 const para = document.createElement('para')
 
-//let firstNum;
+let firstNum;
 let currentOperator;
-//let nextNum;
+let nextNum;
 let numString;
 
 //operate() returns one of the 4 operation functions (+-x/) depending on the chosen operator.
