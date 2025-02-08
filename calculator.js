@@ -1,20 +1,24 @@
-const add = (a,b) => a + b;
-const subtract = (a,b) => a - b;
-const multiply = (a,b) => a*b;
-const divide = (a,b) => a/b;
 
-const buttons = document.querySelector('#buttons')
+
+const numKeys = document.querySelector('#numKeys')
 const display = document.querySelector('#display')
 const equation = document.querySelector('#equal')
 const para = document.createElement('para')
-const ops = document.querySelector('.ops')
+const ops = document.querySelector('#ops')
 
 let firstNum;
 let currentOperator;
 let nextNum;
 let numString = '';
+let contentTrack = '';
 
-//operate() returns one of the 4 operation functions (+-x/) depending on the chosen operator.
+//IT WORKS. calculating operation functions
+const add = (a,b) => a + b;
+const subtract = (a,b) => a - b;
+const multiply = (a,b) => a*b;
+const divide = (a,b) => a/b;
+
+//IT WORKS. operate() returns one of the 4 operation functions (+-x/) depending on the chosen operator.
 function operate(operator,numOne,numTwo) {
     if (operator == '+') {
         return add(numOne,numTwo);
@@ -27,8 +31,17 @@ function operate(operator,numOne,numTwo) {
     }
 }
 
-
+//When number keys are pressed, 
+//Save the number set temporarily to numString
+//And the set of number(numString) is displayed.
 function printBtns(e) {
+    //Meaning, if it's the very beginning of the event
+    /*if (contentTrack !== '') {
+        numString = '';
+        contentTrack = '';
+        console.log(`When numKeys are pressed, contentTrack is ${contentTrack}`)
+    }*/
+
     if (firstNum !== undefined) {
         numString = '';
     }
@@ -63,16 +76,32 @@ function printBtns(e) {
         case 'zero':
             numString += '0';
             break;
+        case 'clear':
+            numString = '';
+            firstNum = undefined;
+            nextNum = undefined;
+            console.log(firstNum)
         default:
             numString += '';
         }
         para.textContent = numString; 
         display.appendChild(para);
-        //console.log(numString);
+        console.log(numString);
 }
 
+//When ops keys are pressed,
+//If both numbers are assigned, call the "calculate()" function
+//And then the result is the numString, 
+//display it, 
+//And Now, fistNum = result/numString; 
+//Else if, 
+    //if first number is undefined, first num = numString; 
+    //Else If,
+        //if the firstNum is assigned already,
+            //If second number is undefined, second num = numString;
 function getOperations(e) {
-
+    contentTrack = numString;
+    console.log(`When ops are pressed, contentTrack is ${contentTrack}`)
     if (firstNum == undefined) {
         firstNum = numString;
         console.log(`firstNum is ${firstNum}`)
@@ -92,18 +121,19 @@ function getOperations(e) {
             break;
         case 'division':
             currentOperator = '/'
-            break;
-        case 'clear':
-            numString = '';
-            break;
     } 
     
 }
 
 
-buttons.addEventListener("click", (printBtns))
+numKeys.addEventListener("click", (printBtns))
+
 ops.addEventListener("click", (getOperations))
-/*equation.addEventListener("click", () => {
-    console.log( operate(currentOperator,firstNum,nextNum))
-})
-    */
+
+//equation.addEventListener("click", (calculate))
+
+/* function calculate(){
+    console.log( operate(currentOperator,firstNum,nextNum));
+}
+   
+*/
