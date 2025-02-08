@@ -10,7 +10,7 @@ let firstNum;
 let currentOperator;
 let nextNum;
 let numString = '';
-let contentTrack = '';
+let contentTrack;
 
 //IT WORKS. calculating operation functions
 const add = (a,b) => a + b;
@@ -30,6 +30,8 @@ function operate(operator,numOne,numTwo) {
         return divide(numOne,numTwo);
     }
 }
+
+//----------------------------------------------------------------------
 
 //When number keys are pressed, 
 //Save the number set temporarily to numString
@@ -96,18 +98,20 @@ function printBtns(e) {
 //And Now, fistNum = result/numString; 
 //Else if, 
     //if first number is undefined, first num = numString; 
-    //Else If,
-        //if the firstNum is assigned already,
-            //If second number is undefined, second num = numString;
+    //Else, second num = numString;
 function getOperations(e) {
     contentTrack = numString;
     console.log(`When ops are pressed, contentTrack is ${contentTrack}`)
+
     if (firstNum == undefined) {
         firstNum = numString;
         console.log(`firstNum is ${firstNum}`)
     } else {
         nextNum = numString;
+        console.log(`firstNum is ${firstNum}`)
+        console.log(`nextNum is ${nextNum}`)
     }
+    
 
     switch (e.target.id) {
         case 'addition':
@@ -122,6 +126,21 @@ function getOperations(e) {
         case 'division':
             currentOperator = '/'
     } 
+
+    if (firstNum !== undefined && nextNum !== undefined) {
+        let answer = operate(currentOperator,firstNum,nextNum);
+        console.log(answer);
+        firstNum = answer;
+        numString = answer;
+
+        para.textContent = answer; 
+        display.appendChild(para);
+        nextNum = '';
+
+        console.log(`firstNum is ${firstNum}`)
+        console.log(`numString is ${numString}`)
+        console.log(`nextNum is ${nextNum}`)
+    }
     
 }
 
@@ -132,8 +151,6 @@ ops.addEventListener("click", (getOperations))
 
 //equation.addEventListener("click", (calculate))
 
-/* function calculate(){
-    console.log( operate(currentOperator,firstNum,nextNum));
+function calculate(){
+    operate(currentOperator,firstNum,nextNum);
 }
-   
-*/
