@@ -1,4 +1,7 @@
+//Problem: The currentOperator is registered before the next Num. 
+//Fix it so that it calculates (90,10,/) instead of (90,/,10)
 
+//Next step: make the equation function work.
 
 const numKeys = document.querySelector('#numKeys')
 const display = document.querySelector('#display')
@@ -10,10 +13,9 @@ let firstNum;
 let currentOperator;
 let nextNum;
 let numString = '';
-let contentTrack;
 
 //IT WORKS. calculating operation functions
-const add = (a,b) => a + b;
+const add = (a,b) => Number(a) + Number(b);
 const subtract = (a,b) => a - b;
 const multiply = (a,b) => a*b;
 const divide = (a,b) => a/b;
@@ -24,20 +26,21 @@ function operate(operator,numOne,numTwo) {
         return add(numOne,numTwo);
     } else if (operator == '-') {
         return subtract(numOne,numTwo);
-    } else if (operator == '*') {
+    } else if (operator == 'x') {
         return multiply(numOne,numTwo);
     } else if (operator == '/') {
         return divide(numOne,numTwo);
     }
 }
 
+console.log(operate('+',90,10))
 //----------------------------------------------------------------------
 
 //When number keys are pressed, 
 //Save the number set temporarily to numString
 //And the set of number(numString) is displayed.
 function printBtns(e) {
-   
+
     switch (e.target.id) {
         case 'one':
             numString += '1';
@@ -91,18 +94,6 @@ function printBtns(e) {
     //if first number is undefined, first num = numString; 
     //Else, second num = numString;
 function getOperations(e) {
-    contentTrack = numString;
-    console.log(`When ops are pressed, contentTrack is ${contentTrack}`)
-
-    if (firstNum == undefined) {
-        firstNum = numString;
-        console.log(`firstNum is ${firstNum}`)
-    } else {
-        nextNum = numString;
-        console.log(`firstNum is ${firstNum}`)
-        console.log(`nextNum is ${nextNum}`)
-    }
-    
 
     switch (e.target.id) {
         case 'addition':
@@ -116,9 +107,28 @@ function getOperations(e) {
             break;
         case 'division':
             currentOperator = '/'
-    } 
+            break;
+    }
+
+    if (firstNum == undefined) {
+        firstNum = numString;
+    } else {
+        nextNum = numString;
+        console.log(`firstNum is ${firstNum}`)
+        console.log(`nextNum is ${nextNum}`)
+        let answer = operate(currentOperator,firstNum,nextNum);
+        console.log(answer);
+        firstNum = answer;
+        numString = answer;
+
+        para.textContent = answer; 
+        display.appendChild(para);
+        nextNum = '';
+    }
+     /*
 
     if (firstNum !== undefined && nextNum !== undefined) {
+        console.log(currentOperator)
         let answer = operate(currentOperator,firstNum,nextNum);
         console.log(answer);
         firstNum = answer;
@@ -131,7 +141,7 @@ function getOperations(e) {
         console.log(`firstNum is ${firstNum}`)
         console.log(`numString is ${numString}`)
         console.log(`nextNum is ${nextNum}`)
-    } 
+    } */
     numString = '';
     
 }
