@@ -37,16 +37,7 @@ function operate(operator,numOne,numTwo) {
 //Save the number set temporarily to numString
 //And the set of number(numString) is displayed.
 function printBtns(e) {
-    //Meaning, if it's the very beginning of the event
-    /*if (contentTrack !== '') {
-        numString = '';
-        contentTrack = '';
-        console.log(`When numKeys are pressed, contentTrack is ${contentTrack}`)
-    }*/
-
-    if (firstNum !== undefined) {
-        numString = '';
-    }
+   
     switch (e.target.id) {
         case 'one':
             numString += '1';
@@ -140,7 +131,8 @@ function getOperations(e) {
         console.log(`firstNum is ${firstNum}`)
         console.log(`numString is ${numString}`)
         console.log(`nextNum is ${nextNum}`)
-    }
+    } 
+    numString = '';
     
 }
 
