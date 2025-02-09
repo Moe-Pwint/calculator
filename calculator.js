@@ -33,7 +33,6 @@ function operate(operator,numOne,numTwo) {
     }
 }
 
-console.log(operate('+',90,10))
 //----------------------------------------------------------------------
 
 //When number keys are pressed, 
@@ -95,21 +94,6 @@ function printBtns(e) {
     //Else, second num = numString;
 function getOperations(e) {
 
-    switch (e.target.id) {
-        case 'addition':
-            currentOperator = '+';
-            break;
-        case 'subtraction':
-            currentOperator = '-';
-            break;
-        case 'multiplication':
-            currentOperator = 'x';
-            break;
-        case 'division':
-            currentOperator = '/'
-            break;
-    }
-
     if (firstNum == undefined) {
         firstNum = numString;
     } else {
@@ -125,23 +109,20 @@ function getOperations(e) {
         display.appendChild(para);
         nextNum = '';
     }
-     /*
-
-    if (firstNum !== undefined && nextNum !== undefined) {
-        console.log(currentOperator)
-        let answer = operate(currentOperator,firstNum,nextNum);
-        console.log(answer);
-        firstNum = answer;
-        numString = answer;
-
-        para.textContent = answer; 
-        display.appendChild(para);
-        nextNum = '';
-
-        console.log(`firstNum is ${firstNum}`)
-        console.log(`numString is ${numString}`)
-        console.log(`nextNum is ${nextNum}`)
-    } */
+    switch (e.target.id) {
+        case 'addition':
+            currentOperator = '+';
+            break;
+        case 'subtraction':
+            currentOperator = '-';
+            break;
+        case 'multiplication':
+            currentOperator = 'x';
+            break;
+        case 'division':
+            currentOperator = '/'
+            break;
+    }
     numString = '';
     
 }
