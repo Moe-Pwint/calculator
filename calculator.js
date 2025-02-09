@@ -3,8 +3,7 @@
 const numKeys = document.querySelector('#numKeys')
 const ops = document.querySelector('#ops')
 const display = document.querySelector('#display')
-//const equation = document.querySelector('#equation')
-const para = document.createElement('para')
+const para = document.querySelector('#displayNums')
 
 let firstNum;
 let currentOperator;
@@ -38,43 +37,54 @@ function printBtns(e) {
     switch (e.target.id) {
         case 'one':
             numString += '1';
+            para.textContent = numString; 
             break;
         case 'two':
             numString += '2';
+            para.textContent = numString; 
             break;
         case 'three':
             numString += '3';
+            para.textContent = numString; 
             break;
         case 'four':
             numString += '4';
+            para.textContent = numString; 
             break;
         case 'five':
             numString += '5';
+            para.textContent = numString; 
             break;
         case 'six':
             numString += '6';
+            para.textContent = numString; 
             break;
         case 'seven':
             numString += '7';
+            para.textContent = numString; 
             break;
         case 'eight':
             numString += '8';
+            para.textContent = numString; 
             break;
             case 'nine':
             numString += '9';
+            para.textContent = numString; 
             break;
         case 'zero':
             numString += '0';
+            para.textContent = numString; 
             break;
         case 'clear':
             numString = '';
+            para.textContent = '0';
             firstNum = undefined;
             nextNum = undefined;
         default:
             numString += '';
         }
-        para.textContent = numString; 
-        display.appendChild(para);
+        //para.textContent = numString; 
+        //display.appendChild(para);
 }
 
 //When ops keys (+-x/) are pressed,
