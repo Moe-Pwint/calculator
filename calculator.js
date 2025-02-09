@@ -1,26 +1,23 @@
-//Problem: The currentOperator is registered before the next Num. 
-//Fix it so that it calculates (90,10,/) instead of (90,/,10)
-
-//Next step: make the equation function work.
+//Next step: 
 
 const numKeys = document.querySelector('#numKeys')
-const display = document.querySelector('#display')
-const equation = document.querySelector('#equal')
-const para = document.createElement('para')
 const ops = document.querySelector('#ops')
+const display = document.querySelector('#display')
+//const equation = document.querySelector('#equation')
+const para = document.createElement('para')
 
 let firstNum;
 let currentOperator;
 let nextNum;
 let numString = '';
 
-//IT WORKS. calculating operation functions
+//Calculating operation functions
 const add = (a,b) => Number(a) + Number(b);
 const subtract = (a,b) => a - b;
 const multiply = (a,b) => a*b;
 const divide = (a,b) => a/b;
 
-//IT WORKS. operate() returns one of the 4 operation functions (+-x/) depending on the chosen operator.
+//Operate() returns one of the 4 operation functions (+-x/) depending on the chosen operator.
 function operate(operator,numOne,numTwo) {
     if (operator == '+') {
         return add(numOne,numTwo);
@@ -32,8 +29,6 @@ function operate(operator,numOne,numTwo) {
         return divide(numOne,numTwo);
     }
 }
-
-//----------------------------------------------------------------------
 
 //When number keys are pressed, 
 //Save the number set temporarily to numString
@@ -75,40 +70,30 @@ function printBtns(e) {
             numString = '';
             firstNum = undefined;
             nextNum = undefined;
-            console.log(firstNum)
         default:
             numString += '';
         }
         para.textContent = numString; 
         display.appendChild(para);
-        console.log(numString);
 }
 
-//When ops keys are pressed,
-//If both numbers are assigned, call the "calculate()" function
-//And then the result is the numString, 
-//display it, 
-//And Now, fistNum = result/numString; 
-//Else if, 
-    //if first number is undefined, first num = numString; 
-    //Else, second num = numString;
+//When ops keys (+-x/) are pressed,
 function getOperations(e) {
 
     if (firstNum == undefined) {
         firstNum = numString;
     } else {
         nextNum = numString;
-        console.log(`firstNum is ${firstNum}`)
-        console.log(`nextNum is ${nextNum}`)
+        //If both numbers are assigned, call the "operate()" function
         let answer = operate(currentOperator,firstNum,nextNum);
-        console.log(answer);
         firstNum = answer;
         numString = answer;
-
+        //display the answer
         para.textContent = answer; 
         display.appendChild(para);
         nextNum = '';
     }
+
     switch (e.target.id) {
         case 'addition':
             currentOperator = '+';
@@ -122,18 +107,16 @@ function getOperations(e) {
         case 'division':
             currentOperator = '/'
             break;
+        case 'equation':
+            firstNum = undefined;
     }
+
+    if (firstNum !== undefined) {
     numString = '';
-    
+    }
 }
 
 
 numKeys.addEventListener("click", (printBtns))
 
 ops.addEventListener("click", (getOperations))
-
-//equation.addEventListener("click", (calculate))
-
-function calculate(){
-    operate(currentOperator,firstNum,nextNum);
-}
