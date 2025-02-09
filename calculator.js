@@ -75,6 +75,14 @@ function printBtns(e) {
             numString += '0';
             para.textContent = numString; 
             break;
+        case 'dot':
+            if ((String(numString)).includes('.')) {
+                break;
+            } else {
+            numString += '.';
+            para.textContent = numString;
+            break;
+            }
         case 'clear':
             numString = '';
             para.textContent = '0';
