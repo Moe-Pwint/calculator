@@ -1,4 +1,6 @@
-//Next step: 
+//step 1: Add a “backspace” button, so the user can undo their last input.
+//step 2: Add keyboard support!
+//step 3: Do a bit of CSS.
 
 const numKeys = document.querySelector('#numKeys')
 const ops = document.querySelector('#ops')
@@ -74,6 +76,14 @@ function printBtns(e) {
         case 'zero':
             numString += '0';
             para.textContent = numString; 
+            break;
+        case 'ce':
+            let newStr = String(numString);
+            numString = Number(newStr.slice(0,-1))
+            para.textContent = numString;
+            if (newStr.length ==1) {
+                numString = '';
+            }
             break;
         case 'dot':
             if ((String(numString)).includes('.')) {
