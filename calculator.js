@@ -96,18 +96,23 @@ function getOperations(e) {
         let answer = operate(currentOperator,firstNum,nextNum);
         
         //display the answer
-        
         if (answer == Infinity) {
             para.textContent = 'NICE TRY';
             firstNum = undefined;
             nextNum = undefined;
             numString = '';
+            
+        } else if  (String(answer).length > 13) {
+                let shortAns = (String(answer)).slice(0,13);
+                console.log(answer)
+                console.log(shortAns)
+                nextNum = '';
+                para.textContent = Number(shortAns);
         } else {
-        firstNum = answer;
-        numString = answer;
-        para.textContent = answer; 
-        //display.appendChild(para);
-        nextNum = '';
+            firstNum = answer;
+            numString = answer;
+            nextNum = '';
+            para.textContent = answer;
         }
     }
 
