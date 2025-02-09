@@ -83,8 +83,6 @@ function printBtns(e) {
         default:
             numString += '';
         }
-        //para.textContent = numString; 
-        //display.appendChild(para);
 }
 
 //When ops keys (+-x/) are pressed,
@@ -96,13 +94,23 @@ function getOperations(e) {
         nextNum = numString;
         //If both numbers are assigned, call the "operate()" function
         let answer = operate(currentOperator,firstNum,nextNum);
+        
+        //display the answer
+        
+        if (answer == Infinity) {
+            para.textContent = 'NICE TRY';
+            firstNum = undefined;
+            nextNum = undefined;
+            numString = '';
+        } else {
         firstNum = answer;
         numString = answer;
-        //display the answer
         para.textContent = answer; 
-        display.appendChild(para);
+        //display.appendChild(para);
         nextNum = '';
+        }
     }
+
 
     switch (e.target.id) {
         case 'addition':
