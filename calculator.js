@@ -104,66 +104,7 @@ function printBtns(e) {
         default:
             numString += '';
         }
-
-        let k = e.keyCode;
-        if (k == 48 || k == 96) {
-            numString += '0';
-            para.textContent = numString;
-        }
-        else if (k == 49 || k == 97) {
-            numString += '1';
-            para.textContent = numString;
-        }
-        else if (k == 50 || k == 98) {
-            numString += '2';
-            para.textContent = numString;
-        }
-        else if (k == 51 || k == 99) {
-            numString += '3';
-            para.textContent = numString;
-        }
-        else if (k == 52 || k == 100) {
-            numString += '4';
-            para.textContent = numString;
-        }
-        else if (k == 53 || k == 101) {
-            numString += '5';
-            para.textContent = numString;
-        }
-        else if (k == 54 || k == 102) {
-            numString += '6';
-            para.textContent = numString;
-        }
-        else if (k == 55 || k == 103) {
-            numString += '7';
-            para.textContent = numString;
-        }
-        else if (k == 56 || k == 104) {
-            numString += '8';
-            para.textContent = numString;
-        }
-        else if (k == 57 || k == 105) {
-            numString += '9';
-            para.textContent = numString;
-        }
-        else if (k == 8) {
-            let newStr = (numString);
-                console.log(`newStr = ${newStr}`)
-                if(newStr.length > 1) {
-                    numString = (newStr.slice(0,-1))
-                    para.textContent = numString;}
-                if(newStr.length == 1) {
-                    para.textContent = 0;
-                    numString = '';
-                }
-                console.log(numString)
-        }
-        else if (e == 110) {
-            if (((String(numString)).includes('.')) == false) {
-                numString += '.';
-                para.textContent = numString;
-            }
-        }
+        console.log(`numString: ${numString}`)
 }
 
 //When ops keys (+-x/) are pressed,
@@ -221,7 +162,69 @@ function getOperations(e) {
 }
 
 
+//Keyboard numbers events
+function printKeyboardNums(event) {
+    let k = event.keyCode;
+    if (k == 48 || k == 96) {
+        numString += '0';
+        para.textContent = numString;
+    }
+    else if (k == 49 || k == 97) {
+        numString += '1';
+        para.textContent = numString;
+    }
+    else if (k == 50 || k == 98) {
+        numString += '2';
+        para.textContent = numString;
+    }
+    else if (k == 51 || k == 99) {
+        numString += '3';
+        para.textContent = numString;
+    }
+    else if (k == 52 || k == 100) {
+        numString += '4';
+        para.textContent = numString;
+    }
+    else if (k == 53 || k == 101) {
+        numString += '5';
+        para.textContent = numString;
+    }
+    else if (k == 54 || k == 102) {
+        numString += '6';
+        para.textContent = numString;
+    }
+    else if (k == 55 || k == 103) {
+        numString += '7';
+        para.textContent = numString;
+    }
+    else if (k == 56 || k == 104) {
+        numString += '8';
+        para.textContent = numString;
+    }
+    else if (k == 57 || k == 105) {
+        numString += '9';
+        para.textContent = numString;
+    }
+    else if (k == 8) {
+        let newStr = String(numString);
+        numString = Number(newStr.slice(0,-1))
+        para.textContent = numString;
+        if (newStr.length ==1) {
+            numString = '';
+        }
+    }
+    else if (k == 110) {
+        if (((String(numString)).includes('.')) == false) {
+            numString += '.';
+            para.textContent = numString;
+        }
+    } else {
+        para.textContent += '';
+    }
+    console.log(`numString: ${numString}`)
+}
+console.log(`initial numString ${numString}`)
 numKeys.addEventListener("click", (printBtns))
-document.addEventListener("keydown", (printBtns))
+document.addEventListener("keydown", (printKeyboardNums))
 
 ops.addEventListener("click", (getOperations))
