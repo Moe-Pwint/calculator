@@ -78,12 +78,16 @@ function printBtns(e) {
             para.textContent = numString; 
             break;
         case 'ce':
-            let newStr = String(numString);
-            numString = Number(newStr.slice(0,-1))
-            para.textContent = numString;
-            if (newStr.length ==1) {
+            let newStr = (numString);
+            console.log(`newStr = ${newStr}`)
+            if(newStr.length > 1) {
+                numString = (newStr.slice(0,-1))
+                para.textContent = numString;}
+            if(newStr.length == 1) {
+                para.textContent = 0;
                 numString = '';
             }
+            console.log(numString)
             break;
         case 'dot':
             if ((String(numString)).includes('.')) {
