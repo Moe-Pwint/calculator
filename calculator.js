@@ -218,12 +218,69 @@ function printKeyboardNums(event) {
             numString += '.';
             para.textContent = numString;
         }
+    } else if (k == 107) {
+        getKeyboardOps(k);
+    } else if (k == 109) {
+        getKeyboardOps(k);
+    } else if (k == 106) {
+        getKeyboardOps(k);
+    } else if (k == 111) {
+        getKeyboardOps(k);
+    } else if (k == 187) {
+        getKeyboardOps(k);
     } else {
         para.textContent += '';
     }
     console.log(`numString: ${numString}`)
 }
-console.log(`initial numString ${numString}`)
+
+//Keyboard ops keys events(+-x/)
+function getKeyboardOps(event) {
+    if (firstNum == undefined) {
+        firstNum = numString;
+    } else {
+        nextNum = numString;
+        //If both numbers are assigned, call the "operate()" function
+        let answer = operate(currentOperator,firstNum,nextNum);
+        
+        //display the answer
+        if (answer == Infinity) {
+            para.textContent = 'NICE TRY';
+            firstNum = undefined;
+            nextNum = undefined;
+            numString = '';
+            
+        } else if  (String(answer).length > 13) {
+                let shortAns = (String(answer)).slice(0,13);
+                console.log(answer)
+                console.log(shortAns)
+                nextNum = '';
+                para.textContent = Number(shortAns);
+        } else {
+            firstNum = answer;
+            numString = answer;
+            nextNum = '';
+            para.textContent = answer;
+        }
+    }
+
+    if (event == 107) {
+        currentOperator = '+';
+    } else if (event == 109) {
+        currentOperator = '-';
+    } else if (event == 106) {
+        currentOperator = 'x';
+    } else if (event == 111) {
+        currentOperator = '/';
+    } else if (event == 187) {
+        firstNum = undefined;
+    }
+
+    if (firstNum !== undefined) {
+        numString = '';
+        }
+}
+
 numKeys.addEventListener("click", (printBtns))
 document.addEventListener("keydown", (printKeyboardNums))
 
