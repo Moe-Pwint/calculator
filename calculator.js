@@ -30,7 +30,7 @@ function operate(operator,numOne,numTwo) {
     }
 }
 
-//When number keys are pressed, 
+//When number buttons are pressed, 
 //Save the number set temporarily to numString
 //And the set of number(numString) is displayed.
 function printBtns(e) {
@@ -107,7 +107,7 @@ function printBtns(e) {
         console.log(`numString: ${numString}`)
 }
 
-//When ops keys (+-x/) are pressed,
+//When ops buttons (+-x/) are pressed,
 function getOperations(e) {
 
     if (firstNum == undefined) {
@@ -213,7 +213,7 @@ function printKeyboardNums(event) {
             numString = '';
         }
     }
-    else if (k == 110) {
+    else if (k == 110 || k == 190) {
         if (((String(numString)).includes('.')) == false) {
             numString += '.';
             para.textContent = numString;
@@ -234,7 +234,7 @@ function printKeyboardNums(event) {
     console.log(`numString: ${numString}`)
 }
 
-//Keyboard ops keys events(+-x/)
+//Keyboard ops events(+-x/)
 function getKeyboardOps(event) {
     if (firstNum == undefined) {
         firstNum = numString;
