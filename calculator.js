@@ -82,7 +82,7 @@ function printBtns(e) {
             if(newStr.length > 1) {
                 numString = (newStr.slice(0,-1))
                 para.textContent = numString;}
-            if(newStr.length == 1) {
+            if(newStr.length <= 1) {
                 para.textContent = 0;
                 numString = '';
             }
@@ -107,7 +107,7 @@ function printBtns(e) {
         console.log(`numString: ${numString}`)
 }
 
-//When ops buttons (+-x/) are pressed,
+//When ops buttons (+-x/) are pressed, 
 function getOperations(e) {
 
     if (firstNum == undefined) {
@@ -156,13 +156,24 @@ function getOperations(e) {
             firstNum = undefined;
     }
 
+    if (e.keyCode == 107) {
+        currentOperator = '+';
+    } else if (e.keyCode == 109) {
+        currentOperator = '-';
+    } else if (e.keyCode == 106) {
+        currentOperator = 'x';
+    } else if (e.keyCode == 111) {
+        currentOperator = '/';
+    } else if (e.keyCode == 187) {
+        firstNum = undefined;
+    }
+
     if (firstNum !== undefined) {
     numString = '';
     }
 }
 
-
-//Keyboard numbers events
+//Keyboard numbers events and Keyboard ops events(+-x/)
 function printKeyboardNums(event) {
     let k = event.keyCode;
     if (k == 48 || k == 96) {
@@ -209,7 +220,8 @@ function printKeyboardNums(event) {
         let newStr = String(numString);
         numString = Number(newStr.slice(0,-1))
         para.textContent = numString;
-        if (newStr.length ==1) {
+        if (newStr.length <= 1) {
+            para.textContent = 0;
             numString = '';
         }
     }
@@ -219,66 +231,19 @@ function printKeyboardNums(event) {
             para.textContent = numString;
         }
     } else if (k == 107) {
-        getKeyboardOps(k);
+        getOperations(event);
     } else if (k == 109) {
-        getKeyboardOps(k);
+        getOperations(event);
     } else if (k == 106) {
-        getKeyboardOps(k);
+        getOperations(event);
     } else if (k == 111) {
-        getKeyboardOps(k);
+        getOperations(event);
     } else if (k == 187) {
-        getKeyboardOps(k);
+        getOperations(event);
     } else {
         para.textContent += '';
     }
     console.log(`numString: ${numString}`)
-}
-
-//Keyboard ops events(+-x/)
-function getKeyboardOps(event) {
-    if (firstNum == undefined) {
-        firstNum = numString;
-    } else {
-        nextNum = numString;
-        //If both numbers are assigned, call the "operate()" function
-        let answer = operate(currentOperator,firstNum,nextNum);
-        
-        //display the answer
-        if (answer == Infinity) {
-            para.textContent = 'NICE TRY';
-            firstNum = undefined;
-            nextNum = undefined;
-            numString = '';
-            
-        } else if  (String(answer).length > 13) {
-                let shortAns = (String(answer)).slice(0,13);
-                console.log(answer)
-                console.log(shortAns)
-                nextNum = '';
-                para.textContent = Number(shortAns);
-        } else {
-            firstNum = answer;
-            numString = answer;
-            nextNum = '';
-            para.textContent = answer;
-        }
-    }
-
-    if (event == 107) {
-        currentOperator = '+';
-    } else if (event == 109) {
-        currentOperator = '-';
-    } else if (event == 106) {
-        currentOperator = 'x';
-    } else if (event == 111) {
-        currentOperator = '/';
-    } else if (event == 187) {
-        firstNum = undefined;
-    }
-
-    if (firstNum !== undefined) {
-        numString = '';
-        }
 }
 
 numKeys.addEventListener("click", (printBtns))
