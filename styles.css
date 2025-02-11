@@ -5,16 +5,66 @@ html {
 box-sizing: inherit;
 }
 
+#container {
+  width: 335px;
+  padding: 5px;
+  margin: auto;
+  background-color: rgb(9, 79, 104);
+}
 
+#display{
+  border: solid black 3px;
+}
+
+#displayNums {
+  
+  font-size: 40px;
+  background-color: rgb(215, 239, 226);
+}
 
 #buttons {
-  width: 200px;
-  border: solid blue 1px;
+  
+  display: flex;
+  justify-content: flex-start;
+}
+
+#nums {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+  display:flex;
+  width: 243px;
+  gap: 1px;
+  flex-wrap: wrap-reverse;
+  flex-direction: row;
+}
+
+#ops {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+  display:flex;
+  width: 80px;
+  gap: 1px;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.numKeys {
+  width: 80px;
+  height: 80px;
+  background-color: #c7cfff;
   
 }
 
-#display {
-  width: 200px;
-  height: 50px;
-  border: solid red 1px;
+.operation {
+  width: 80px;
+  height: 80px;
+  background-color: #51bd87;
+  
 }
+
+#zero {
+  width: 160px;
+}
+
