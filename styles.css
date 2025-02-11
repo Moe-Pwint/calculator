@@ -28,7 +28,7 @@ box-sizing: inherit;
   justify-content: flex-start;
 }
 
-#nums {
+#numKeys {
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: auto;
@@ -65,6 +65,6 @@ box-sizing: inherit;
 }
 
 #zero {
-  width: 160px;
+  width: 161px;
 }
 
