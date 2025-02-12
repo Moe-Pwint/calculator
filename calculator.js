@@ -4,7 +4,10 @@
 const numKeys = document.querySelector('#numKeys')
 const ops = document.querySelector('#ops')
 const display = document.querySelector('#display')
-const para = document.querySelector('#displayNums')
+const para = document.createElement('p')
+para.textContent = 0;
+display.appendChild(para); 
+para.setAttribute('id','paraFont')
 
 let firstNum;
 let currentOperator;
