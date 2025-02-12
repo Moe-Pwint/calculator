@@ -6,7 +6,7 @@ box-sizing: inherit;
 }
 
 #container {
-  width: 335px;
+  width: 333px;
   padding: 5px;
   margin: auto;
   background-color: rgb(9, 79, 104);
@@ -18,7 +18,7 @@ box-sizing: inherit;
 
 #displayNums {
   
-  font-size: 40px;
+  font-size: 50px;
   background-color: rgb(215, 239, 226);
 }
 
@@ -54,6 +54,7 @@ box-sizing: inherit;
   width: 80px;
   height: 80px;
   background-color: #c7cfff;
+  font-size: 20px;
   
 }
 
@@ -61,6 +62,7 @@ box-sizing: inherit;
   width: 80px;
   height: 80px;
   background-color: #51bd87;
+  font-size: 20px;
   
 }
 
